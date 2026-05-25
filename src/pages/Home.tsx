@@ -14,9 +14,16 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-warm-50">
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-warm-50 via-orange-50/30 to-warm-100" />
+      {/* Hero Section with Background Image */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=1920&q=80" 
+            alt="狗狗在草坪玩耍"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-warm-100/90 via-warm-50/85 to-warm-100/90" />
+        </div>
         
         <div className="absolute top-10 left-10 text-6xl opacity-30 animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}>🐾</div>
         <div className="absolute top-20 right-16 text-5xl opacity-25 animate-bounce" style={{animationDelay: '0.5s', animationDuration: '2.5s'}}>🐱</div>
@@ -28,15 +35,19 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <div className="mb-8">
-              <div className="w-40 h-40 bg-gradient-to-br from-primary to-warm-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl hover:scale-110 transition-transform duration-300">
-                <span className="text-8xl">🐶</span>
+              <div className="w-44 h-44 rounded-full overflow-hidden mx-auto mb-6 shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300">
+                <img 
+                  src="https://images.unsplash.com/photo-1612536057832-2ff7ead58692?w=400&h=400&fit=crop" 
+                  alt="可爱的柯基犬"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <p className="text-warm-600 font-medium">可爱的柯基等你来互动</p>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
               欢迎来到<span className="text-primary">宠互助</span>
             </h1>
-            <p className="text-xl text-gray-500 mb-8">
+            <p className="text-xl text-gray-600 mb-8">
               一个温暖的宠物爱好者社区，在这里分享养宠心得，互相帮助，一起参与精彩活动
             </p>
             <div className="flex flex-wrap justify-center gap-4">
