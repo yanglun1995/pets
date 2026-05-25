@@ -15,13 +15,23 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-warm-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-warm-50 via-warm-100 to-warm-50 py-16">
-        <div className="container mx-auto px-4">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-warm-50 via-orange-50/30 to-warm-100" />
+        
+        <div className="absolute top-10 left-10 text-6xl opacity-30 animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}>🐾</div>
+        <div className="absolute top-20 right-16 text-5xl opacity-25 animate-bounce" style={{animationDelay: '0.5s', animationDuration: '2.5s'}}>🐱</div>
+        <div className="absolute bottom-20 left-20 text-4xl opacity-20 animate-bounce" style={{animationDelay: '1s', animationDuration: '4s'}}>🐰</div>
+        <div className="absolute bottom-10 right-10 text-5xl opacity-25 animate-bounce" style={{animationDelay: '1.5s', animationDuration: '3.5s'}}>🐹</div>
+        <div className="absolute top-40 left-1/4 text-3xl opacity-30 animate-bounce" style={{animationDelay: '2s', animationDuration: '2.8s'}}>🦴</div>
+        <div className="absolute bottom-40 right-1/4 text-4xl opacity-20 animate-bounce" style={{animationDelay: '0.8s', animationDuration: '3.2s'}}>🎾</div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="mb-6">
-              <div className="w-32 h-32 bg-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-6xl">🐕</span>
+            <div className="mb-8">
+              <div className="w-40 h-40 bg-gradient-to-br from-primary to-warm-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl hover:scale-110 transition-transform duration-300">
+                <span className="text-8xl">🐶</span>
               </div>
+              <p className="text-warm-600 font-medium">可爱的柯基等你来互动</p>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
               欢迎来到<span className="text-primary">宠互助</span>
@@ -32,13 +42,13 @@ const Home = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/exchange"
-                className="px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-warm-600 transition-all shadow-md hover:shadow-lg"
+                className="px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-warm-600 transition-all shadow-md hover:shadow-lg hover:scale-105"
               >
                 开始交流
               </Link>
               <Link
                 to="/events"
-                className="px-8 py-3 bg-white text-primary border-2 border-primary rounded-full font-medium hover:bg-warm-50 transition-all"
+                className="px-8 py-3 bg-white text-primary border-2 border-primary rounded-full font-medium hover:bg-warm-50 transition-all hover:scale-105"
               >
                 查看活动
               </Link>
