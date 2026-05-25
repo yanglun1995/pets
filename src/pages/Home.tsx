@@ -18,11 +18,16 @@ const Home = () => {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=1920&q=80" 
+            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1920&q=80" 
             alt="狗狗在草坪玩耍"
             className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = "https://images.unsplash.com/photo-1552053831-71594a27632d?w=1920&q=80";
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-warm-100/90 via-warm-50/85 to-warm-100/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-warm-100/95 via-warm-50/90 to-warm-100/95" />
         </div>
         
         <div className="absolute top-10 left-10 text-6xl opacity-30 animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}>🐾</div>
@@ -37,9 +42,14 @@ const Home = () => {
             <div className="mb-8">
               <div className="w-44 h-44 rounded-full overflow-hidden mx-auto mb-6 shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1612536057832-2ff7ead58692?w=400&h=400&fit=crop" 
+                  src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop" 
                   alt="可爱的柯基犬"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=400&h=400&fit=crop";
+                  }}
                 />
               </div>
               <p className="text-warm-600 font-medium">可爱的柯基等你来互动</p>

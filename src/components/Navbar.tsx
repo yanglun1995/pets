@@ -24,9 +24,14 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full overflow-hidden shadow-md border-2 border-white">
               <img 
-                src="https://images.unsplash.com/photo-1612536057832-2ff7ead58692?w=100&h=100&fit=crop" 
+                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=100&h=100&fit=crop" 
                 alt="柯基犬头像"
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=100&h=100&fit=crop";
+                }}
               />
             </div>
             <span className="text-xl font-bold text-primary">宠互助</span>
