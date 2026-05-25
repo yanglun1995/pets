@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, MessageCircle, Calendar, Home, User } from 'lucide-react';
+import { Menu, X, Heart, MessageCircle, Calendar, Home, User, ShieldAlert } from 'lucide-react';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -11,6 +11,7 @@ const Navbar = () => {
     { path: '/exchange', label: '养宠交流', icon: MessageCircle },
     { path: '/help', label: '养宠互助', icon: Heart },
     { path: '/events', label: '宠物活动', icon: Calendar },
+    { path: '/exposure', label: '曝光台', icon: ShieldAlert },
     { path: '/about', label: '关于', icon: User }
   ];
 

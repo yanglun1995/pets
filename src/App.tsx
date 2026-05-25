@@ -4,6 +4,7 @@ import Home from "@/pages/Home";
 import Exchange from "@/pages/Exchange";
 import Help from "@/pages/Help";
 import Events from "@/pages/Events";
+import Exposure from "@/pages/Exposure";
 import About from "@/pages/About";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/exchange" element={<Exchange />} />
             <Route path="/help" element={<Help />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/exposure" element={<Exposure />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </main>
