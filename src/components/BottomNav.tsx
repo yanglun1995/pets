@@ -1,14 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, MapPin, Camera, ShieldAlert, User } from 'lucide-react';
+import { Home, Heart, MapPin, Camera, User } from 'lucide-react';
 
 const BottomNav = () => {
   const location = useLocation();
 
   const navItems = [
     { path: '/', label: '发现', icon: Home },
-    { path: '/nearby', label: '附近', icon: MapPin },
+    { path: '/help', label: '互助', icon: Heart },
     { path: '/create', label: '发布', icon: Camera, isPlus: true },
-    { path: '/exposure', label: '曝光', icon: ShieldAlert },
+    { path: '/nearby', label: '附近', icon: MapPin },
     { path: '/profile', label: '我的', icon: User },
   ];
 

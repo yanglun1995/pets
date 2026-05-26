@@ -150,7 +150,7 @@ const Feed = () => {
     post.category === activeTab
   );
 
-  const tabs = ['推荐', '柯基', '柴犬', '猫咪', '金毛', '视频', '好物'];
+  const tabs = ['推荐', '养宠心得', '饮食红黑榜', '曝光台'];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
@@ -189,10 +189,9 @@ const Feed = () => {
                 boxShadow: activeTab === tag ? '0 4px 15px rgba(255, 107, 157, 0.4)' : '0 2px 8px rgba(0,0,0,0.05)'
               }}
             >
-              {tag === '柯基' && '🐶'}
-              {tag === '柴犬' && '🦊'}
-              {tag === '猫咪' && '🐱'}
-              {tag === '金毛' && '🐕'}
+              {tag === '养宠心得' && '📝'}
+              {tag === '饮食红黑榜' && '🍖'}
+              {tag === '曝光台' && '⚠️'}
               {' '}{tag}
             </button>
           ))}
