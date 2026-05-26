@@ -12,6 +12,7 @@ interface HelpRequest {
   avatar: string;
   status: 'pending' | 'matched' | 'completed';
   createdAt: Date;
+  price: number | null;
 }
 
 const helpRequests: HelpRequest[] = [
@@ -25,7 +26,8 @@ const helpRequests: HelpRequest[] = [
     author: '金毛大黄',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
     status: 'pending',
-    createdAt: new Date(Date.now() - 3600000)
+    createdAt: new Date(Date.now() - 3600000),
+    price: 30
   },
   {
     id: '2',
@@ -37,7 +39,8 @@ const helpRequests: HelpRequest[] = [
     author: '橘猫糖糖',
     avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop',
     status: 'matched',
-    createdAt: new Date(Date.now() - 7200000)
+    createdAt: new Date(Date.now() - 7200000),
+    price: null
   },
   {
     id: '3',
@@ -47,9 +50,10 @@ const helpRequests: HelpRequest[] = [
     location: '斗门区井岸',
     date: '2024-01-20',
     author: '柯基妮妮',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=100&h=100&fit=crop',
     status: 'pending',
-    createdAt: new Date(Date.now() - 10800000)
+    createdAt: new Date(Date.now() - 10800000),
+    price: 50
   },
   {
     id: '4',
@@ -61,7 +65,8 @@ const helpRequests: HelpRequest[] = [
     author: '泰迪球球',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
     status: 'completed',
-    createdAt: new Date(Date.now() - 14400000)
+    createdAt: new Date(Date.now() - 14400000),
+    price: null
   },
   {
     id: '5',
@@ -73,7 +78,8 @@ const helpRequests: HelpRequest[] = [
     author: '英短蓝蓝',
     avatar: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=100&h=100&fit=crop',
     status: 'pending',
-    createdAt: new Date(Date.now() - 18000000)
+    createdAt: new Date(Date.now() - 18000000),
+    price: 25
   }
 ];
 
@@ -165,9 +171,20 @@ const HelpRequestCard = ({ request }: { request: HelpRequest }) => {
               <span className="text-xs text-gray-300">·</span>
               <span className="text-xs text-gray-400">{formatTime(request.createdAt)}</span>
             </div>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(request.status)}`}>
-              {getStatusLabel(request.status)}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(request.status)}`}>
+                {getStatusLabel(request.status)}
+              </span>
+              {request.price !== null ? (
+                <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs font-bold">
+                  ¥{request.price}
+                </span>
+              ) : (
+                <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-bold">
+                  免费
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -178,6 +195,8 @@ const HelpRequestCard = ({ request }: { request: HelpRequest }) => {
 const HelpPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedType, setSelectedType] = useState('walk');
+  const [isFree, setIsFree] = useState(true);
+  const [price, setPrice] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -194,10 +213,16 @@ const HelpPage = () => {
 
   const filteredRequests = helpRequests;
 
+  const walkCount = helpRequests.filter(r => r.type === 'walk').length;
+  const feedCount = helpRequests.filter(r => r.type === 'feed').length;
+  const careCount = helpRequests.filter(r => r.type === 'care').length;
+
   const handleSubmit = () => {
     setShowModal(false);
     alert('发布成功！等待好心人接单~');
     setFormData({ title: '', description: '', location: '', date: '' });
+    setIsFree(true);
+    setPrice('');
   };
 
   return (
@@ -213,6 +238,24 @@ const HelpPage = () => {
       </header>
 
       <main className="px-4 py-4">
+        <div className="grid grid-cols-3 gap-3 mb-5">
+          <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+            <div className="text-3xl mb-2">🐕</div>
+            <p className="text-xl font-bold text-gray-800">{walkCount}</p>
+            <p className="text-xs text-gray-500">遛狗需求</p>
+          </div>
+          <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+            <div className="text-3xl mb-2">🍖</div>
+            <p className="text-xl font-bold text-gray-800">{feedCount}</p>
+            <p className="text-xs text-gray-500">喂养需求</p>
+          </div>
+          <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+            <div className="text-3xl mb-2">🏠</div>
+            <p className="text-xl font-bold text-gray-800">{careCount}</p>
+            <p className="text-xs text-gray-500">寄养需求</p>
+          </div>
+        </div>
+
         <div className="bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-500 rounded-3xl p-5 mb-5 text-white shadow-xl">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm">
@@ -242,24 +285,6 @@ const HelpPage = () => {
           {filteredRequests.map((request) => (
             <HelpRequestCard key={request.id} request={request} />
           ))}
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 mt-6">
-          <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-            <div className="text-3xl mb-2">🐕</div>
-            <p className="text-xl font-bold text-gray-800">23</p>
-            <p className="text-xs text-gray-500">遛狗需求</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-            <div className="text-3xl mb-2">🍖</div>
-            <p className="text-xl font-bold text-gray-800">15</p>
-            <p className="text-xs text-gray-500">喂养需求</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-            <div className="text-3xl mb-2">🏠</div>
-            <p className="text-xl font-bold text-gray-800">8</p>
-            <p className="text-xs text-gray-500">寄养需求</p>
-          </div>
         </div>
       </main>
 
@@ -293,6 +318,41 @@ const HelpPage = () => {
                   ))}
                 </div>
               </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">报酬方式</label>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setIsFree(true)}
+                    className={`flex-1 py-3 rounded-xl font-bold transition-all ${
+                      isFree ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    🆓 免费
+                  </button>
+                  <button
+                    onClick={() => setIsFree(false)}
+                    className={`flex-1 py-3 rounded-xl font-bold transition-all ${
+                      !isFree ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    💰 付费
+                  </button>
+                </div>
+              </div>
+
+              {!isFree && (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">金额（元）</label>
+                  <input
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300"
+                    placeholder="输入金额"
+                  />
+                </div>
+              )}
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">标题</label>

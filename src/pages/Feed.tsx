@@ -177,24 +177,42 @@ const Feed = () => {
         </div>
 
         <div className="flex overflow-x-auto scrollbar-hide px-4 pb-3 gap-2">
-          {tabs.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setActiveTab(tag)}
-              className="px-5 py-2 text-sm font-bold whitespace-nowrap rounded-full transition-all shadow-sm"
-              style={{
-                backgroundColor: activeTab === tag ? 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)' : 'white',
-                background: activeTab === tag ? 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)' : 'white',
-                color: activeTab === tag ? 'white' : '#6B7280',
-                boxShadow: activeTab === tag ? '0 4px 15px rgba(255, 107, 157, 0.4)' : '0 2px 8px rgba(0,0,0,0.05)'
-              }}
-            >
-              {tag === '养宠心得' && '📝'}
-              {tag === '饮食红黑榜' && '🍖'}
-              {tag === '曝光台' && '⚠️'}
-              {' '}{tag}
-            </button>
-          ))}
+          {tabs.map((tag) => {
+            if (tag === '曝光台') {
+              return (
+                <button
+                  key={tag}
+                  onClick={() => navigate('/exposure')}
+                  className="px-5 py-2 text-sm font-bold whitespace-nowrap rounded-full transition-all shadow-sm"
+                  style={{
+                    backgroundColor: 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)',
+                    background: 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)',
+                    color: 'white',
+                    boxShadow: '0 4px 15px rgba(255, 107, 157, 0.4)'
+                  }}
+                >
+                  ⚠️ {tag}
+                </button>
+              );
+            }
+            return (
+              <button
+                key={tag}
+                onClick={() => setActiveTab(tag)}
+                className="px-5 py-2 text-sm font-bold whitespace-nowrap rounded-full transition-all shadow-sm"
+                style={{
+                  backgroundColor: activeTab === tag ? 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)' : 'white',
+                  background: activeTab === tag ? 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)' : 'white',
+                  color: activeTab === tag ? 'white' : '#6B7280',
+                  boxShadow: activeTab === tag ? '0 4px 15px rgba(255, 107, 157, 0.4)' : '0 2px 8px rgba(0,0,0,0.05)'
+                }}
+              >
+                {tag === '养宠心得' && '📝'}
+                {tag === '饮食红黑榜' && '🍖'}
+                {' '}{tag}
+              </button>
+            );
+          })}
         </div>
       </header>
 

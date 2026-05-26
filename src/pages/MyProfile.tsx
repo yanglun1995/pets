@@ -11,7 +11,7 @@ const MyProfile = () => {
   const profile = currentPetProfile || {
     id: 'demo',
     name: '妮妮',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=200&h=200&fit=crop',
     coverImage: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&h=400&fit=crop',
     breed: '柯基犬',
     age: 3,
@@ -21,7 +21,7 @@ const MyProfile = () => {
     following: 567,
     posts: 89,
     owner: '妮妮主人',
-    ownerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
+    ownerAvatar: 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=100&h=100&fit=crop',
     createdAt: new Date()
   };
 
@@ -34,7 +34,7 @@ const MyProfile = () => {
   const myPosts = [
     {
       id: '1',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=400&h=400&fit=crop',
       likes: 234,
       comments: 45
     },
@@ -46,7 +46,7 @@ const MyProfile = () => {
     },
     {
       id: '3',
-      image: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=400&h=400&fit=crop',
       likes: 123,
       comments: 23
     },
