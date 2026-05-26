@@ -396,15 +396,15 @@ const HelpPage = () => {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white rounded-3xl w-full max-h-[90vh] overflow-auto shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl sticky top-0">
+          <div className="bg-white rounded-3xl w-full max-h-[calc(100vh-40px)] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl">
               <h2 className="text-xl font-bold flex items-center gap-2">
                 <Plus size={24} />
                 发布互助需求
               </h2>
             </div>
             
-            <div className="p-5">
+            <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">选择类型</label>
                 <div className="grid grid-cols-2 gap-2">
