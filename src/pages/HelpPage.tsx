@@ -15,7 +15,7 @@ interface HelpRequest {
   price: number | null;
 }
 
-const westieAvatar = 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=100&h=100&fit=crop';
+const corgiAvatar = 'https://images.unsplash.com/photo-1593036800269-019af93b5d99?w=100&h=100&fit=crop';
 const goldenAvatar = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&h=100&fit=crop';
 const catAvatar = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop';
 const teddyAvatar = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=100&h=100&fit=crop';
@@ -52,11 +52,11 @@ const helpRequests: HelpRequest[] = [
     id: '3',
     type: 'care',
     title: '🐶 宠物寄养',
-    description: '回老家一周，需要寄养狗狗。狗狗疫苗齐全，性格温顺。狗狗叫小白，是一只可爱的西高地白梗。',
+    description: '回老家一周，需要寄养狗狗。狗狗疫苗齐全，性格温顺。狗狗叫妮妮，是一只可爱的柯基犬。',
     location: '斗门区井岸',
     date: '2024-01-20',
-    author: '西高地小白',
-    avatar: westieAvatar,
+    author: '柯基妮妮',
+    avatar: corgiAvatar,
     status: 'pending',
     createdAt: new Date(Date.now() - 10800000),
     price: 50

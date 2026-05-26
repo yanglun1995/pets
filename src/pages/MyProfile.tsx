@@ -10,18 +10,18 @@ const MyProfile = () => {
 
   const profile = currentPetProfile || {
     id: 'demo',
-    name: '小白',
-    avatar: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=200&h=200&fit=crop',
-    coverImage: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=400&fit=crop',
-    breed: '西高地白梗',
+    name: '妮妮',
+    avatar: 'https://images.unsplash.com/photo-1593036800269-019af93b5d99?w=200&h=200&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&h=400&fit=crop',
+    breed: '威尔士柯基犬',
     age: 3,
     gender: 'female' as const,
-    description: '我叫小白，3岁女孩纸~ 🐾\n\n🏠 家住珠海十字门\n\n💕 爱好：吃和睡\n\n✨ 技能：握手、坐下\n\n快来和我交朋友吧！',
+    description: '我叫妮妮，3岁女孩纸~ 🐾\n\n🏠 家住珠海十字门\n\n💕 爱好：吃和睡\n\n✨ 技能：握手、坐下\n\n快来和我交朋友吧！',
     followers: 12345,
     following: 567,
     posts: 89,
-    owner: '小白主人',
-    ownerAvatar: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=100&h=100&fit=crop',
+    owner: '妮妮主人',
+    ownerAvatar: 'https://images.unsplash.com/photo-1593036800269-019af93b5d99?w=100&h=100&fit=crop',
     createdAt: new Date()
   };
 
@@ -34,37 +34,37 @@ const MyProfile = () => {
   const myPosts = [
     {
       id: '1',
-      image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1593036800269-019af93b5d99?w=400&h=400&fit=crop',
       likes: 234,
       comments: 45
     },
     {
       id: '2',
-      image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1558929996-da64ba858215?w=400&h=400&fit=crop',
       likes: 567,
       comments: 89
     },
     {
       id: '3',
-      image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop',
       likes: 123,
       comments: 23
     },
     {
       id: '4',
-      image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1593036800269-019af93b5d99?w=400&h=400&fit=crop',
       likes: 890,
       comments: 123
     },
     {
       id: '5',
-      image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1558929996-da64ba858215?w=400&h=400&fit=crop',
       likes: 456,
       comments: 67
     },
     {
       id: '6',
-      image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop',
       likes: 321,
       comments: 45
     }
@@ -154,7 +154,7 @@ const MyProfile = () => {
           </div>
 
           <div className="flex flex-wrap gap-2 pb-4">
-            <span className="px-3 py-1.5 bg-pink-100 text-pink-600 rounded-full text-xs font-medium">🐾 西高地</span>
+            <span className="px-3 py-1.5 bg-pink-100 text-pink-600 rounded-full text-xs font-medium">🐾 柯基</span>
             <span className="px-3 py-1.5 bg-purple-100 text-purple-600 rounded-full text-xs font-medium">🏠 珠海</span>
             <span className="px-3 py-1.5 bg-blue-100 text-blue-600 rounded-full text-xs font-medium">🍖 吃货</span>
             <span className="px-3 py-1.5 bg-green-100 text-green-600 rounded-full text-xs font-medium">😴 嗜睡</span>
