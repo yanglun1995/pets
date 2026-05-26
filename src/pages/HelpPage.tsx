@@ -15,6 +15,12 @@ interface HelpRequest {
   price: number | null;
 }
 
+const westieAvatar = 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=100&h=100&fit=crop';
+const goldenAvatar = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&h=100&fit=crop';
+const catAvatar = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop';
+const teddyAvatar = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=100&h=100&fit=crop';
+const britishAvatar = 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=100&h=100&fit=crop';
+
 const helpRequests: HelpRequest[] = [
   {
     id: '1',
@@ -24,7 +30,7 @@ const helpRequests: HelpRequest[] = [
     location: '香洲区吉大',
     date: '2024-01-15',
     author: '金毛大黄',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+    avatar: goldenAvatar,
     status: 'pending',
     createdAt: new Date(Date.now() - 3600000),
     price: 30
@@ -37,7 +43,7 @@ const helpRequests: HelpRequest[] = [
     location: '横琴新区',
     date: '2024-01-13',
     author: '橘猫糖糖',
-    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop',
+    avatar: catAvatar,
     status: 'matched',
     createdAt: new Date(Date.now() - 7200000),
     price: null
@@ -46,11 +52,11 @@ const helpRequests: HelpRequest[] = [
     id: '3',
     type: 'care',
     title: '🐶 宠物寄养',
-    description: '回老家一周，需要寄养狗狗。狗狗疫苗齐全，性格温顺。狗狗叫妮妮，是一只可爱的柯基犬。',
+    description: '回老家一周，需要寄养狗狗。狗狗疫苗齐全，性格温顺。狗狗叫小白，是一只可爱的西高地白梗。',
     location: '斗门区井岸',
     date: '2024-01-20',
-    author: '柯基妮妮',
-    avatar: 'https://images.unsplash.com/photo-1558656797-185e1e68f34e?w=100&h=100&fit=crop',
+    author: '西高地小白',
+    avatar: westieAvatar,
     status: 'pending',
     createdAt: new Date(Date.now() - 10800000),
     price: 50
@@ -63,7 +69,7 @@ const helpRequests: HelpRequest[] = [
     location: '香洲区拱北',
     date: '长期',
     author: '泰迪球球',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+    avatar: teddyAvatar,
     status: 'completed',
     createdAt: new Date(Date.now() - 14400000),
     price: null
@@ -76,7 +82,7 @@ const helpRequests: HelpRequest[] = [
     location: '金湾区三灶',
     date: '2024-01-18',
     author: '英短蓝蓝',
-    avatar: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=100&h=100&fit=crop',
+    avatar: britishAvatar,
     status: 'pending',
     createdAt: new Date(Date.now() - 18000000),
     price: 25
@@ -321,9 +327,9 @@ const HelpPage = () => {
       </main>
 
       {showDetailModal && selectedRequest && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4" onClick={() => setShowDetailModal(false)}>
-          <div className="bg-white rounded-3xl w-full max-h-[85vh] overflow-auto shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl sticky top-0">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-0 sm:p-4" onClick={() => setShowDetailModal(false)}>
+          <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 sticky top-0">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold flex items-center gap-2">
                   {getTypeIcon(selectedRequest.type)}
@@ -338,7 +344,7 @@ const HelpPage = () => {
               </div>
             </div>
             
-            <div className="p-5">
+            <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 100px)' }}>
               <div className="flex items-center gap-4 mb-4">
                 <img 
                   src={selectedRequest.avatar} 
@@ -385,7 +391,7 @@ const HelpPage = () => {
                 )}
               </div>
 
-              <button className="w-full py-3.5 bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+              <button className="w-full py-3.5 bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 mb-4">
                 <MessageCircle size={20} />
                 联系求助者
               </button>
@@ -395,16 +401,24 @@ const HelpPage = () => {
       )}
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white rounded-3xl w-full max-h-[calc(100vh-40px)] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl">
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                <Plus size={24} />
-                发布互助需求
-              </h2>
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-0 sm:p-4" onClick={() => setShowModal(false)}>
+          <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 sticky top-0">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Plus size={24} />
+                  发布互助需求
+                </h2>
+                <button 
+                  onClick={() => setShowModal(false)}
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
             
-            <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
+            <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 100px)' }}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">选择类型</label>
                 <div className="grid grid-cols-2 gap-2">
@@ -507,7 +521,7 @@ const HelpPage = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full py-3 bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                className="w-full py-3 bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all mb-4"
               >
                 发布需求
               </button>

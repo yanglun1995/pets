@@ -65,7 +65,7 @@ const exposureList: ExposureItem[] = [
   }
 ];
 
-const ExposureCard = ({ item }: { item: ExposureItem }) => {
+const ExposureCard = ({ item, onClick }: { item: ExposureItem; onClick: () => void }) => {
   const getTypeColor = (type: string) => {
     switch(type) {
       case '不牵绳': return 'bg-red-100 text-red-600';
@@ -94,7 +94,10 @@ const ExposureCard = ({ item }: { item: ExposureItem }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all">
+    <div 
+      className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all cursor-pointer"
+      onClick={onClick}
+    >
       <div className="flex items-start gap-4">
         <div className="relative">
           <img 
@@ -144,6 +147,7 @@ const ExposureCard = ({ item }: { item: ExposureItem }) => {
 
 const Exposure = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showDetail, setShowDetail] = useState<ExposureItem | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [formData, setFormData] = useState({
     title: '',
@@ -227,7 +231,7 @@ const Exposure = () => {
 
         <div className="space-y-4">
           {filteredExposures.map((item) => (
-            <ExposureCard key={item.id} item={item} />
+            <ExposureCard key={item.id} item={item} onClick={() => setShowDetail(item)} />
           ))}
         </div>
 
@@ -250,10 +254,70 @@ const Exposure = () => {
         </div>
       </main>
 
+      {/* 曝光详情弹窗 */}
+      {showDetail && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-0 sm:p-4" onClick={() => setShowDetail(null)}>
+          <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-5 sticky top-0">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <AlertTriangle size={24} />
+                  曝光详情
+                </h2>
+                <button 
+                  onClick={() => setShowDetail(null)}
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 100px)' }}>
+              <div className="flex items-center gap-4 mb-4">
+                <img 
+                  src={showDetail.avatar} 
+                  alt={showDetail.author}
+                  className="w-14 h-14 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-bold text-gray-800">{showDetail.author}</p>
+                  <p className="text-sm text-gray-500">{showDetail.createdAt.toLocaleDateString()}</p>
+                </div>
+              </div>
+              
+              <h3 className="text-lg font-bold text-gray-800 mb-3">{showDetail.title}</h3>
+              
+              <p className="text-gray-700 mb-4 leading-relaxed">{showDetail.description}</p>
+              
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center gap-2 text-gray-600">
+                  <MapPin size={16} />
+                  <span className="text-sm">{showDetail.location}</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-600">
+                  <span className="px-2.5 py-1 bg-red-100 text-red-600 rounded-full text-xs font-medium">
+                    {showDetail.type}
+                  </span>
+                  <span className="px-2.5 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">
+                    {showDetail.status}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-100">
+                <span>{showDetail.views}浏览</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 曝光发布弹窗 */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-0 sm:p-4" onClick={() => setShowModal(false)}>
           <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-5">
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-5 sticky top-0">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold flex items-center gap-2">
                   <AlertTriangle size={24} />

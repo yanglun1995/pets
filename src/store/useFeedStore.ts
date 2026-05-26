@@ -75,9 +75,9 @@ interface FeedStore {
   likeFeedPost: (postId: string) => void;
 }
 
-const corgiAvatar = 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=200&h=200&fit=crop';
-const corgiCover = 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=800&h=400&fit=crop';
-const corgiPost = 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=600&h=750&fit=crop';
+const westieAvatar = 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=200&h=200&fit=crop';
+const westieCover = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=400&fit=crop';
+const westiePost = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=750&fit=crop';
 
 const shibaAvatar = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200&h=200&fit=crop';
 const shibaPost = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=750&fit=crop';
@@ -92,15 +92,15 @@ const initialFeedPosts: FeedPost[] = [
   {
     id: '1',
     type: 'image',
-    title: '🐶 柯基妮妮的日常 - 卖萌时间！',
-    content: '今天妮妮学会新技能啦！握手🤝 大家看看我们可爱吗？#柯基 #萌宠 #可爱',
-    image: corgiPost,
-    author: '柯基妮妮',
-    avatar: corgiAvatar,
+    title: '🐶 西高地小白的日常 - 卖萌时间！',
+    content: '今天小白学会新技能啦！握手🤝 大家看看我们可爱吗？#西高地 #萌宠 #可爱',
+    image: westiePost,
+    author: '西高地小白',
+    avatar: westieAvatar,
     likes: 2345,
     comments: 456,
     createdAt: new Date(Date.now() - 3600000),
-    tags: ['#柯基', '#小短腿', '#萌宠'],
+    tags: ['#西高地', '#小白', '#萌宠'],
     category: '养宠心得'
   },
   {
@@ -148,15 +148,15 @@ const initialFeedPosts: FeedPost[] = [
   {
     id: '5',
     type: 'image',
-    title: '🐶 柯基屁股太可爱了！',
-    content: '柯基的屁股真的是世界上最可爱的东西！圆滚滚的~ #柯基 #蜜桃臀',
-    image: corgiPost,
-    author: '柯基妮妮',
-    avatar: corgiAvatar,
+    title: '🐶 西高地小白太可爱了！',
+    content: '西高地的胡子真的是世界上最可爱的东西！圆滚滚的~ #西高地 #小白',
+    image: westiePost,
+    author: '西高地小白',
+    avatar: westieAvatar,
     likes: 4567,
     comments: 678,
     createdAt: new Date(Date.now() - 18000000),
-    tags: ['#柯基', '#屁股', '#可爱'],
+    tags: ['#西高地', '#小白', '#可爱'],
     category: '养宠心得'
   },
   {
@@ -218,15 +218,15 @@ const initialFeedPosts: FeedPost[] = [
   {
     id: '10',
     type: 'image',
-    title: '🐶 柯基妮妮的自我介绍',
-    content: '大家好！我是柯基妮妮，3岁女孩纸~ 爱好吃和睡，会握手和坐下技能！#柯基 #自我介绍',
-    image: corgiPost,
-    author: '柯基妮妮',
-    avatar: corgiAvatar,
+    title: '🐶 西高地小白的自我介绍',
+    content: '大家好！我是西高地小白，3岁女孩纸~ 爱好吃和睡，会握手和坐下技能！#西高地 #小白',
+    image: westiePost,
+    author: '西高地小白',
+    avatar: westieAvatar,
     likes: 5678,
     comments: 789,
     createdAt: new Date(Date.now() - 36000000),
-    tags: ['#柯基', '#妮妮', '#珠海'],
+    tags: ['#西高地', '#小白', '#珠海'],
     category: '养宠心得'
   }
 ];
@@ -234,17 +234,17 @@ const initialFeedPosts: FeedPost[] = [
 const initialVideoPosts: VideoPost[] = [
   {
     id: 'v1',
-    title: '🐶 柯基小短腿跑步萌态',
-    description: '柯基妮妮跑步的样子太可爱了！小短腿蹬蹬蹬~',
+    title: '🐶 西高地小白跑步萌态',
+    description: '西高地小白跑步的样子太可爱了！小短腿蹬蹬蹬~',
     videoUrl: '',
-    thumbnail: corgiPost,
-    author: '柯基妮妮',
-    avatar: corgiAvatar,
+    thumbnail: westiePost,
+    author: '西高地小白',
+    avatar: westieAvatar,
     likes: 12345,
     comments: 2345,
     views: 67890,
     createdAt: new Date(Date.now() - 86400000),
-    tags: ['#柯基', '#跑步', '#可爱']
+    tags: ['#西高地', '#跑步', '#可爱']
   },
   {
     id: 'v2',
@@ -279,18 +279,18 @@ const initialVideoPosts: VideoPost[] = [
 const initialPetProfiles: PetProfile[] = [
   {
     id: 'p1',
-    name: '妮妮',
-    avatar: corgiAvatar,
-    coverImage: corgiCover,
-    breed: '柯基犬',
+    name: '小白',
+    avatar: westieAvatar,
+    coverImage: westieCover,
+    breed: '西高地白梗',
     age: 3,
     gender: 'female',
-    description: '我叫妮妮，3岁女孩纸~ 🐾\n\n🏠 家住珠海十字门\n\n💕 爱好：吃和睡\n\n✨ 技能：握手、坐下\n\n快来和我交朋友吧！',
+    description: '我叫小白，3岁女孩纸~ 🐾\n\n🏠 家住珠海十字门\n\n💕 爱好：吃和睡\n\n✨ 技能：握手、坐下\n\n快来和我交朋友吧！',
     followers: 12345,
     following: 567,
     posts: 89,
-    owner: '妮妮主人',
-    ownerAvatar: corgiAvatar,
+    owner: '小白主人',
+    ownerAvatar: westieAvatar,
     createdAt: new Date(Date.now() - 10950000000)
   },
   {
