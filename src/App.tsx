@@ -10,7 +10,7 @@ import About from "@/pages/About";
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/pets">
       <div className="min-h-screen flex flex-col pb-20 md:pb-0">
         <Navbar />
         <main className="flex-1">
