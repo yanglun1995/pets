@@ -53,3 +53,66 @@ export interface Exposure {
   createdAt: Date;
   status: string;
 }
+
+export interface VideoPost {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  thumbnail: string;
+  author: string;
+  avatar: string;
+  likes: number;
+  comments: number;
+  views: number;
+  createdAt: Date;
+  tags: string[];
+}
+
+export interface PetProfile {
+  id: string;
+  name: string;
+  avatar: string;
+  coverImage: string;
+  breed: string;
+  age: number;
+  gender: 'male' | 'female';
+  description: string;
+  followers: number;
+  following: number;
+  posts: number;
+  owner: string;
+  ownerAvatar: string;
+  createdAt: Date;
+}
+
+export interface NearbyDog {
+  id: string;
+  name: string;
+  avatar: string;
+  breed: string;
+  age: number;
+  gender: 'male' | 'female';
+  distance: number;
+  location: string;
+  lastSeen: Date;
+  owner: string;
+  ownerAvatar: string;
+}
+
+export interface FeedPost {
+  id: string;
+  type: 'image' | 'video';
+  title: string;
+  content: string;
+  image?: string;
+  videoUrl?: string;
+  thumbnail?: string;
+  author: string;
+  avatar: string;
+  likes: number;
+  comments: number;
+  createdAt: Date;
+  tags: string[];
+  category: string;
+}
