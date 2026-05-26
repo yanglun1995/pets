@@ -21,8 +21,19 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="text-4xl animate-bounce">🐕</div>
-            <span className="text-xl font-bold bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">宠互助</span>
+            <div className="w-10 h-10 rounded-full overflow-hidden shadow-md border-2 border-white">
+              <img 
+                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=100&h=100&fit=crop" 
+                alt="柯基犬头像"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=100&h=100&fit=crop";
+                }}
+              />
+            </div>
+            <span className="text-xl font-bold" style={{ fontFamily: "'Comic Sans MS', 'Marker Felt', cursive", background: 'linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold' }}>宠互助</span>
           </Link>
 
           {/* Desktop Menu */}

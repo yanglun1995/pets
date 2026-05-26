@@ -71,13 +71,21 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <div className="mb-8">
-              <div className="w-44 h-44 rounded-full mx-auto mb-6 shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300 flex items-center justify-center bg-gradient-to-br from-orange-300 to-pink-300">
-                <div className="text-8xl animate-bounce">🐕</div>
+              <div className="w-44 h-44 rounded-full mx-auto mb-6 shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop" 
+                  alt="可爱的柯基犬"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=400&h=400&fit=crop";
+                  }}
+                />
               </div>
-              <p className="text-warm-600 font-medium">可爱的柯基等你来互动</p>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              欢迎来到<span className="bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">宠互助</span>
+              欢迎来到 <span style={{ fontFamily: "'Comic Sans MS', 'Marker Felt', cursive", background: 'linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold' }}>宠互助</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               一个温暖的宠物爱好者社区，在这里分享养宠心得，互相帮助，一起参与精彩活动
