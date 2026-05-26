@@ -1,10 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, MessageCircle, Calendar, Home, User, ShieldAlert } from 'lucide-react';
-import { useState } from 'react';
+import { Heart, MessageCircle, Calendar, Home, User, ShieldAlert } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
     { path: '/', label: '首页', icon: Home },
@@ -23,19 +21,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full overflow-hidden shadow-md border-2 border-white">
-              <img 
-                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=100&h=100&fit=crop" 
-                alt="柯基犬头像"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=100&h=100&fit=crop";
-                }}
-              />
-            </div>
-            <span className="text-xl font-bold text-primary">宠互助</span>
+            <div className="text-4xl animate-bounce">🐕</div>
+            <span className="text-xl font-bold bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">宠互助</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -58,39 +45,7 @@ const Navbar = () => {
               );
             })}
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-warm-50"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
-                    isActive(item.path)
-                      ? 'bg-primary text-white'
-                      : 'text-gray-600 hover:bg-warm-50'
-                  }`}
-                >
-                  <Icon size={20} />
-                  <span className="font-medium">{item.label}</span>
-                </Link>
-              );
-            })}
-          </div>
-        )}
       </div>
     </nav>
   );

@@ -14,20 +14,51 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-warm-50">
-      {/* Hero Section with Background Image */}
-      <section className="relative py-24 overflow-hidden">
+      {/* Hero Section with Flat Illustration Background */}
+      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-orange-100 via-pink-100 to-purple-100">
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1920&q=80" 
-            alt="狗狗在草坪玩耍"
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.src = "https://images.unsplash.com/photo-1552053831-71594a27632d?w=1920&q=80";
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-warm-100/95 via-warm-50/90 to-warm-100/95" />
+          <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="80" fill="#FFB6C1" opacity="0.3" />
+            <circle cx="1100" cy="150" r="100" fill="#FFDAB9" opacity="0.3" />
+            <circle cx="600" cy="500" r="120" fill="#E6E6FA" opacity="0.3" />
+            <circle cx="200" cy="450" r="60" fill="#98FB98" opacity="0.3" />
+            <circle cx="1000" cy="400" r="90" fill="#FFA07A" opacity="0.3" />
+            
+            <g transform="translate(200, 200)">
+              <ellipse cx="80" cy="100" rx="60" ry="40" fill="#F4A460" />
+              <circle cx="80" cy="50" r="35" fill="#F4A460" />
+              <ellipse cx="55" cy="25" rx="15" ry="20" fill="#F4A460" />
+              <ellipse cx="105" cy="25" rx="15" ry="20" fill="#F4A460" />
+              <circle cx="70" cy="45" r="5" fill="#333" />
+              <circle cx="90" cy="45" r="5" fill="#333" />
+              <ellipse cx="80" cy="60" rx="4" ry="3" fill="#333" />
+              <path d="M70 70 Q80 80 90 70" stroke="#333" strokeWidth="2" fill="none" />
+            </g>
+            
+            <g transform="translate(800, 250)">
+              <ellipse cx="70" cy="90" rx="50" ry="35" fill="#D2691E" />
+              <circle cx="70" cy="45" r="30" fill="#D2691E" />
+              <ellipse cx="48" cy="22" rx="12" ry="18" fill="#D2691E" />
+              <ellipse cx="92" cy="22" rx="12" ry="18" fill="#D2691E" />
+              <circle cx="60" cy="40" r="4" fill="#333" />
+              <circle cx="80" cy="40" r="4" fill="#333" />
+              <ellipse cx="70" cy="52" rx="3" ry="2.5" fill="#333" />
+              <path d="M62 60 Q70 68 78 60" stroke="#333" strokeWidth="2" fill="none" />
+            </g>
+            
+            <g transform="translate(500, 350)">
+              <ellipse cx="60" cy="80" rx="45" ry="30" fill="#FFD700" />
+              <circle cx="60" cy="40" r="25" fill="#FFD700" />
+              <ellipse cx="42" cy="20" rx="10" ry="15" fill="#FFD700" />
+              <ellipse cx="78" cy="20" rx="10" ry="15" fill="#FFD700" />
+              <circle cx="52" cy="36" r="3.5" fill="#333" />
+              <circle cx="68" cy="36" r="3.5" fill="#333" />
+              <ellipse cx="60" cy="47" rx="2.5" ry="2" fill="#333" />
+              <path d="M54 53 Q60 59 66 53" stroke="#333" strokeWidth="2" fill="none" />
+            </g>
+            
+            <rect x="0" y="450" width="1200" height="150" fill="#90EE90" />
+          </svg>
         </div>
         
         <div className="absolute top-10 left-10 text-6xl opacity-30 animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}>🐾</div>
@@ -40,22 +71,13 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <div className="mb-8">
-              <div className="w-44 h-44 rounded-full overflow-hidden mx-auto mb-6 shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop" 
-                  alt="可爱的柯基犬"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=400&h=400&fit=crop";
-                  }}
-                />
+              <div className="w-44 h-44 rounded-full mx-auto mb-6 shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300 flex items-center justify-center bg-gradient-to-br from-orange-300 to-pink-300">
+                <div className="text-8xl animate-bounce">🐕</div>
               </div>
               <p className="text-warm-600 font-medium">可爱的柯基等你来互动</p>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              欢迎来到<span className="text-primary">宠互助</span>
+              欢迎来到<span className="bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">宠互助</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               一个温暖的宠物爱好者社区，在这里分享养宠心得，互相帮助，一起参与精彩活动

@@ -101,12 +101,13 @@ const Exposure = () => {
                 <ShieldAlert size={24} className="text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">文明养宠曝光台</h1>
+                <h1 className="text-3xl font-bold text-gray-800">不文明养宠曝光台</h1>
                 <p className="text-gray-500">曝光不文明养宠行为，促进社区和谐</p>
               </div>
             </div>
             <button
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg"
+              onClick={() => alert('曝光功能即将上线！')}
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg cursor-pointer"
             >
               <Plus size={20} />
               曝光不文明
