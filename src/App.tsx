@@ -6,6 +6,7 @@ import NearbyDogs from "@/pages/NearbyDogs";
 import Exposure from "@/pages/Exposure";
 import MyProfile from "@/pages/MyProfile";
 import CreatePost from "@/pages/CreatePost";
+import PostDetail from "@/pages/PostDetail";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/exposure" element={<Exposure />} />
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/post/detail/:type/:id" element={<PostDetail />} />
         </Routes>
         <BottomNav />
       </div>

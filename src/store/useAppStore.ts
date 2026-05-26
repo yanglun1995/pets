@@ -1,15 +1,17 @@
 import { create } from 'zustand';
-import { ExchangePost, HelpRequest, Event, Exposure } from '../types';
+import { ExchangePost, HelpRequest, Event, Exposure, FeedPost } from '../types';
 
 interface AppStore {
   exchangePosts: ExchangePost[];
   helpRequests: HelpRequest[];
   events: Event[];
   exposures: Exposure[];
+  feedPosts: FeedPost[];
   addExchangePost: (post: Omit<ExchangePost, 'id' | 'createdAt'>) => void;
   addHelpRequest: (request: Omit<HelpRequest, 'id' | 'createdAt'>) => void;
   addEvent: (event: Omit<Event, 'id' | 'createdAt' | 'currentParticipants'>) => void;
   addExposure: (exposure: Omit<Exposure, 'id' | 'createdAt' | 'views' | 'dislikes'>) => void;
+  addFeedPost: (post: Omit<FeedPost, 'id' | 'createdAt'>) => void;
   likeExchangePost: (postId: string) => void;
   registerEvent: (eventId: string) => void;
 }
@@ -188,6 +190,7 @@ export const useAppStore = create<AppStore>((set) => ({
   helpRequests: initialHelpRequests,
   events: initialEvents,
   exposures: initialExposures,
+  feedPosts: [],
   addExchangePost: (post) =>
     set((state) => ({
       exchangePosts: [
@@ -233,6 +236,17 @@ export const useAppStore = create<AppStore>((set) => ({
           createdAt: new Date()
         },
         ...state.exposures
+      ]
+    })),
+  addFeedPost: (post) =>
+    set((state) => ({
+      feedPosts: [
+        {
+          ...post,
+          id: Date.now().toString(),
+          createdAt: new Date()
+        },
+        ...state.feedPosts
       ]
     })),
   likeExchangePost: (postId) =>

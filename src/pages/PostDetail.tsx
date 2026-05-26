@@ -3,11 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ThumbsUp, MessageCircle, Eye, Clock, User, Send, UserPlus, LogIn } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import { useUserStore } from '../store/useUserStore';
+import { useFeedStore } from '../store/useFeedStore';
 
 const PostDetail = () => {
   const navigate = useNavigate();
   const { type, id } = useParams();
   const { exchangePosts, helpRequests, events, exposures, likeExchangePost } = useAppStore();
+  const { feedPosts } = useFeedStore();
   const { currentUser, addComment, getComments, register, login } = useUserStore();
   
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -35,6 +37,9 @@ const PostDetail = () => {
   } else if (type === 'exposure') {
     post = exposures.find(p => p.id === id);
     postType = 'exposure';
+  } else if (type === 'feed') {
+    post = feedPosts.find(p => p.id === id);
+    postType = 'feed';
   }
 
   const comments = id ? getComments(id) : [];
@@ -62,7 +67,7 @@ const PostDetail = () => {
     if (currentUser) {
       addComment({
         postId: id!,
-        postType: postType as 'exchange' | 'help' | 'event' | 'exposure',
+        postType: postType as 'exchange' | 'help' | 'event' | 'exposure' | 'feed',
         content: comment,
         author: currentUser.username,
         authorId: currentUser.id,
@@ -71,7 +76,7 @@ const PostDetail = () => {
     } else {
       addComment({
         postId: id!,
-        postType: postType as 'exchange' | 'help' | 'event' | 'exposure',
+        postType: postType as 'exchange' | 'help' | 'event' | 'exposure' | 'feed',
         content: comment,
         author: '匿名用户',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop'
@@ -137,6 +142,7 @@ const PostDetail = () => {
               {type === 'help' && '互助详情'}
               {type === 'event' && '活动详情'}
               {type === 'exposure' && '曝光详情'}
+              {type === 'feed' && '帖子详情'}
             </h1>
           </div>
         </div>
@@ -233,6 +239,11 @@ const PostDetail = () => {
                 {type === 'exposure' && 'location' in post && (
                   <span className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
                     📍 {post.location}
+                  </span>
+                )}
+                {type === 'feed' && 'category' in post && (
+                  <span className="px-4 py-2 bg-pink-100 text-pink-700 rounded-full text-sm font-medium">
+                    {post.category}
                   </span>
                 )}
               </div>

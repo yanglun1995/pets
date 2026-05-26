@@ -12,7 +12,7 @@ export interface User {
 interface Comment {
   id: string;
   postId: string;
-  postType: 'exchange' | 'help' | 'event' | 'exposure';
+  postType: 'exchange' | 'help' | 'event' | 'exposure' | 'feed';
   content: string;
   author: string;
   authorId?: string;

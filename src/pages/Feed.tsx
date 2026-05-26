@@ -222,7 +222,7 @@ const Feed = () => {
             <FeedCard 
               key={post.id} 
               post={post}
-              onClick={() => navigate(`/post/detail/${post.id}`)}
+              onClick={() => navigate(`/post/detail/feed/${post.id}`)}
             />
           ))}
         </div>

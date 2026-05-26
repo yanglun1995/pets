@@ -15,7 +15,7 @@ interface HelpRequest {
   price: number | null;
 }
 
-const corgiAvatar = 'https://images.unsplash.com/photo-1593036800269-019af93b5d99?w=100&h=100&fit=crop';
+const corgiAvatar = 'https://images.unsplash.com/photo-1612536053702-f4d42263b68d?w=100&h=100&fit=crop';
 const goldenAvatar = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&h=100&fit=crop';
 const catAvatar = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop';
 const teddyAvatar = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=100&h=100&fit=crop';
