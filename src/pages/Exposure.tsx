@@ -1,85 +1,21 @@
 import { useState } from 'react';
 import { ShieldAlert, Plus, Search } from 'lucide-react';
+import { useAppStore } from '../store/useAppStore';
 import ExposureCard from '../components/ExposureCard';
 
-interface Exposure {
-  id: string;
-  title: string;
-  description: string;
-  location: string;
-  type: string;
-  author: string;
-  avatar: string;
-  views: number;
-  dislikes: number;
-  evidenceImages?: string[];
-  createdAt: Date;
-  status: string;
-}
-
-const mockExposures: Exposure[] = [
-  {
-    id: '1',
-    title: '某小区内大型犬未牵绳追逐行人',
-    description: '今天下午在小区花园看到一个业主遛一只大型犬，完全没有牵绳，狗狗还追逐了一个小孩，太危险了。希望大家引以为戒，外出遛狗一定要牵绳！',
-    location: '北京市朝阳区某小区',
-    type: '不牵绳',
-    author: '热心市民',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
-    views: 1256,
-    dislikes: 234,
-    evidenceImages: ['https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=400&fit=crop'],
-    createdAt: new Date(Date.now() - 86400000),
-    status: '处理中'
-  },
-  {
-    id: '2',
-    title: '遛狗时不清理狗狗粪便',
-    description: '在公园草坪上发现多处未清理的狗粪，影响环境卫生。希望各位铲屎官养成好习惯，随身携带拾便袋。',
-    location: '上海市浦东新区世纪公园',
-    type: '随地便溺',
-    author: '环保志愿者',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
-    views: 856,
-    dislikes: 156,
-    evidenceImages: ['https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop'],
-    createdAt: new Date(Date.now() - 172800000),
-    status: '待处理'
-  },
-  {
-    id: '3',
-    title: '深夜犬吠扰民严重',
-    description: '楼下住户养的狗每到半夜就叫个不停，已经持续一个多月，严重影响睡眠。已向物业反映多次但仍未解决。',
-    location: '广州市天河区某小区',
-    type: '扰民',
-    author: '受影响居民',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
-    views: 2103,
-    dislikes: 445,
-    evidenceImages: ['https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=600&h=400&fit=crop'],
-    createdAt: new Date(Date.now() - 259200000),
-    status: '处理中'
-  },
-  {
-    id: '4',
-    title: '发现被遗弃的小狗',
-    description: '在垃圾堆旁发现一只被遗弃的小狗，看起来才几个月大。希望有爱心人士能够收养，给它一个温暖的家。',
-    location: '深圳市南山区',
-    type: '遗弃宠物',
-    author: '好心人',
-    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop',
-    views: 3456,
-    dislikes: 89,
-    evidenceImages: ['https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop'],
-    createdAt: new Date(Date.now() - 345600000),
-    status: '已处理'
-  }
-];
-
 const Exposure = () => {
-  const [exposures] = useState<Exposure[]>(mockExposures);
+  const { exposures, addExposure } = useAppStore();
+  const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeType, setActiveType] = useState('全部');
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    location: '',
+    type: '不牵绳',
+    author: '',
+    evidenceImages: ''
+  });
 
   const types = ['全部', '不牵绳', '随地便溺', '扰民', '遗弃宠物', '其他'];
 
@@ -89,6 +25,31 @@ const Exposure = () => {
     const matchesType = activeType === '全部' || exposure.type === activeType;
     return matchesSearch && matchesType;
   });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.title && formData.description && formData.location && formData.author) {
+      addExposure({
+        title: formData.title,
+        description: formData.description,
+        location: formData.location,
+        type: formData.type,
+        author: formData.author,
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
+        evidenceImages: formData.evidenceImages ? [formData.evidenceImages] : [],
+        status: '待处理'
+      });
+      setShowModal(false);
+      setFormData({
+        title: '',
+        description: '',
+        location: '',
+        type: '不牵绳',
+        author: '',
+        evidenceImages: ''
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-warm-50 py-8">
@@ -106,8 +67,8 @@ const Exposure = () => {
               </div>
             </div>
             <button
-              onClick={() => alert('曝光功能即将上线！')}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg cursor-pointer"
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg"
             >
               <Plus size={20} />
               曝光不文明
@@ -193,6 +154,132 @@ const Exposure = () => {
           </div>
         )}
       </div>
+
+      {/* 发布曝光 Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-t-2xl">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold">曝光不文明养宠行为</h2>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-white hover:bg-white/20 rounded-full p-2 transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  曝光标题 <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.title}
+                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  placeholder="例如：某小区大型犬未牵绳追逐行人"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  详细描述 <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formData.description}
+                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  placeholder="详细描述不文明行为的时间、地点、具体情况等"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    发生地点 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.location}
+                    onChange={(e) => setFormData({...formData, location: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                    placeholder="例如：北京市朝阳区某小区"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    行为类型 <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    required
+                    value={formData.type}
+                    onChange={(e) => setFormData({...formData, type: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  >
+                    <option value="不牵绳">不牵绳</option>
+                    <option value="随地便溺">随地便溺</option>
+                    <option value="扰民">扰民</option>
+                    <option value="遗弃宠物">遗弃宠物</option>
+                    <option value="其他">其他</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  您的昵称 <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.author}
+                  onChange={(e) => setFormData({...formData, author: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  placeholder="例如：热心市民"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  证据图片（可选）
+                </label>
+                <input
+                  type="url"
+                  value={formData.evidenceImages}
+                  onChange={(e) => setFormData({...formData, evidenceImages: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  placeholder="输入证据图片URL"
+                />
+              </div>
+
+              <div className="flex gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors"
+                >
+                  取消
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md"
+                >
+                  提交曝光
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

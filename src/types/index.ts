@@ -38,3 +38,18 @@ export interface Event {
   status: string;
   createdAt: Date;
 }
+
+export interface Exposure {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  type: string;
+  author: string;
+  avatar: string;
+  views: number;
+  dislikes: number;
+  evidenceImages?: string[];
+  createdAt: Date;
+  status: string;
+}
