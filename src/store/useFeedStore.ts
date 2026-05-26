@@ -75,9 +75,9 @@ interface FeedStore {
   likeFeedPost: (postId: string) => void;
 }
 
-const corgiAvatar = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop';
-const corgiCover = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=400&fit=crop';
-const corgiPost = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=750&fit=crop';
+const corgiAvatar = 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=200&h=200&fit=crop';
+const corgiCover = 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=800&h=400&fit=crop';
+const corgiPost = 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=600&h=750&fit=crop';
 
 const shibaAvatar = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200&h=200&fit=crop';
 const shibaPost = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=750&fit=crop';
@@ -85,7 +85,7 @@ const shibaPost = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?
 const catAvatar = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop';
 const catPost = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=750&fit=crop';
 
-const goldenAvatar = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop';
+const goldenAvatar = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&h=200&fit=crop';
 const goldenPost = 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=750&fit=crop';
 
 const initialFeedPosts: FeedPost[] = [
@@ -108,7 +108,7 @@ const initialFeedPosts: FeedPost[] = [
     type: 'image',
     title: '🍖 狗狗零食红黑榜！',
     content: '给大家分享一些狗狗零食的测评，哪些值得买，哪些千万别踩坑！#零食 #测评',
-    image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=750&fit=crop',
+    image: goldenPost,
     author: '宠物营养师',
     avatar: goldenAvatar,
     likes: 1892,
@@ -135,10 +135,10 @@ const initialFeedPosts: FeedPost[] = [
     id: '4',
     type: 'image',
     title: '⚠️ 曝光！小区大型犬不牵绳',
-    content: '今天在小区看到一只大型犬没牵绳，差点吓到小孩！希望主人能文明养宠！#文明养宠',
+    content: '今天在小区看到一只大型犬没有牵绳，差点吓到路过的小孩！希望主人能文明养宠，遵守规定。',
     image: 'https://images.unsplash.com/photo-1544568100-847a948585b9?w=600&h=750&fit=crop',
     author: '热心市民',
-    avatar: catAvatar,
+    avatar: goldenAvatar,
     likes: 1234,
     comments: 345,
     createdAt: new Date(Date.now() - 14400000),
@@ -175,11 +175,10 @@ const initialFeedPosts: FeedPost[] = [
   },
   {
     id: '7',
-    type: 'video',
+    type: 'image',
     title: '🐕 金毛日常 - 游泳初体验',
     content: '今天带大黄去游泳，第一次下水超级兴奋！#金毛 #游泳',
-    thumbnail: goldenPost,
-    videoUrl: '',
+    image: goldenPost,
     author: '金毛大黄',
     avatar: goldenAvatar,
     likes: 2890,
@@ -192,7 +191,7 @@ const initialFeedPosts: FeedPost[] = [
     id: '8',
     type: 'image',
     title: '⚠️ 曝光！宠物粪便不清理',
-    content: '小区草坪上经常有人不清理宠物粪便，太不文明了！请大家文明养宠！#文明养宠',
+    content: '小区草坪上经常有人不清理宠物粪便，不仅影响环境，还容易传播细菌。请文明养宠！',
     image: 'https://images.unsplash.com/photo-1568043210943-0e8c6dde0f90?w=600&h=750&fit=crop',
     author: '爱护环境',
     avatar: goldenAvatar,
@@ -207,7 +206,7 @@ const initialFeedPosts: FeedPost[] = [
     type: 'image',
     title: '🍎 狗狗不能吃的水果清单',
     content: '很多水果对狗狗有毒！分享一份清单，大家一定要注意！#水果 #禁忌',
-    image: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&h=750&fit=crop',
+    image: catPost,
     author: '宠物营养师',
     avatar: goldenAvatar,
     likes: 3456,
@@ -298,7 +297,7 @@ const initialPetProfiles: PetProfile[] = [
     id: 'p2',
     name: '豆豆',
     avatar: shibaAvatar,
-    coverImage: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=800&h=400&fit=crop',
+    coverImage: shibaPost,
     breed: '柴犬',
     age: 2,
     gender: 'female',

@@ -13,10 +13,10 @@ const CreatePost = () => {
   const [isPosting, setIsPosting] = useState(false);
 
   const sampleImages = [
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=600&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=600&h=600&fit=crop',
     'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=600&fit=crop',
     'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop',
     'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&h=600&fit=crop'
   ];
@@ -31,7 +31,7 @@ const CreatePost = () => {
 
     const profile = currentPetProfile || {
       name: '妮妮',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop'
+      avatar: 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=200&h=200&fit=crop'
     };
 
     if (postType === 'image') {
@@ -45,7 +45,7 @@ const CreatePost = () => {
         likes: 0,
         comments: 0,
         tags: [],
-        category: '萌宠'
+        category: '养宠心得'
       });
     } else {
       addVideoPost({
@@ -71,7 +71,7 @@ const CreatePost = () => {
   const suggestedTags = ['#柯基', '#柴犬', '#猫咪', '#金毛', '#萌宠', '#可爱', '#珠海'];
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-white pb-24">
       <header className="sticky top-0 bg-white z-50 border-b border-gray-100">
         <div className="px-4 py-3 flex items-center justify-between">
           <button 
@@ -92,9 +92,9 @@ const CreatePost = () => {
       </header>
 
       <div className="p-4">
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-3 mb-4">
           <img 
-            src={currentPetProfile?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop'}
+            src={currentPetProfile?.avatar || 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=100&h=100&fit=crop'}
             alt="avatar"
             className="w-12 h-12 rounded-full object-cover"
           />
@@ -110,7 +110,7 @@ const CreatePost = () => {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="分享你家宠物的精彩瞬间~"
-          className="w-full h-40 resize-none border-none focus:outline-none text-gray-800 placeholder-gray-400 text-base leading-relaxed"
+          className="w-full h-32 resize-none border-none focus:outline-none text-gray-800 placeholder-gray-400 text-base leading-relaxed"
         />
 
         <input
@@ -173,7 +173,7 @@ const CreatePost = () => {
               <img 
                 src={selectedImage} 
                 alt="预览"
-                className="w-full h-64 object-cover rounded-xl"
+                className="w-full h-48 object-cover rounded-xl"
               />
               <button
                 onClick={() => setSelectedImage(null)}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ShieldAlert, Plus, Search, AlertTriangle, MapPin, Clock } from 'lucide-react';
+import { ShieldAlert, Plus, Search, AlertTriangle, MapPin, Clock, X } from 'lucide-react';
 
 interface ExposureItem {
   id: string;
@@ -22,7 +22,7 @@ const exposureList: ExposureItem[] = [
     location: '香洲区某小区',
     type: '不牵绳',
     author: '热心市民',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&h=100&fit=crop',
     views: 2345,
     createdAt: new Date(Date.now() - 3600000),
     status: '已处理'
@@ -34,7 +34,7 @@ const exposureList: ExposureItem[] = [
     location: '横琴新区',
     type: '粪便',
     author: '爱护环境',
-    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=100&h=100&fit=crop',
     views: 1892,
     createdAt: new Date(Date.now() - 7200000),
     status: '处理中'
@@ -46,7 +46,7 @@ const exposureList: ExposureItem[] = [
     location: '斗门区',
     type: '扰民',
     author: '苦不堪言',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=100&h=100&fit=crop',
     views: 3456,
     createdAt: new Date(Date.now() - 10800000),
     status: '已处理'
@@ -58,7 +58,7 @@ const exposureList: ExposureItem[] = [
     location: '香洲区公交站',
     type: '违规',
     author: '市民小李',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=100&h=100&fit=crop',
     views: 1234,
     createdAt: new Date(Date.now() - 14400000),
     status: '待处理'
@@ -106,7 +106,7 @@ const ExposureCard = ({ item }: { item: ExposureItem }) => {
         
         <div className="flex-1">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-bold text-gray-800 flex-1">{item.title}</h3>
+            <h3 className="font-bold text-gray-800 flex-1 text-sm">{item.title}</h3>
             <span className={`px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getStatusColor(item.status)}`}>
               {item.status}
             </span>
@@ -166,7 +166,7 @@ const Exposure = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 pb-24">
       <header className="sticky top-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100 shadow-sm">
         <div className="px-4 py-4">
           <h1 className="text-2xl font-black text-gray-800 flex items-center gap-2">
@@ -251,16 +251,24 @@ const Exposure = () => {
       </main>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-5 rounded-t-3xl">
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                <AlertTriangle size={24} />
-                曝光不文明行为
-              </h2>
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-0 sm:p-4" onClick={() => setShowModal(false)}>
+          <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-5">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <AlertTriangle size={24} />
+                  曝光不文明行为
+                </h2>
+                <button 
+                  onClick={() => setShowModal(false)}
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
             
-            <div className="p-5">
+            <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 100px)' }}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">选择类型</label>
                 <div className="grid grid-cols-2 gap-2">
@@ -302,7 +310,7 @@ const Exposure = () => {
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">发生地点</label>
                 <input
                   type="text"
@@ -315,7 +323,7 @@ const Exposure = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all mb-4"
               >
                 提交曝光
               </button>
