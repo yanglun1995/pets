@@ -75,9 +75,9 @@ interface FeedStore {
   likeFeedPost: (postId: string) => void;
 }
 
-const corgiAvatar = 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=200&h=200&fit=crop';
-const corgiCover = 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&h=400&fit=crop';
-const corgiPost = 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=600&h=750&fit=crop';
+const corgiAvatar = 'https://images.unsplash.com/photo-1558656797-185e1e68f34e?w=200&h=200&fit=crop';
+const corgiCover = 'https://images.unsplash.com/photo-1558656797-185e1e68f34e?w=800&h=400&fit=crop';
+const corgiPost = 'https://images.unsplash.com/photo-1558656797-185e1e68f34e?w=600&h=750&fit=crop';
 
 const shibaAvatar = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200&h=200&fit=crop';
 const shibaPost = 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&h=750&fit=crop';

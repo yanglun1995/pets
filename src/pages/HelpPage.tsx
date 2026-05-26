@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, PawPrint, Calendar, Home, User, MapPin } from 'lucide-react';
+import { Plus, PawPrint, Calendar, Home, User, MapPin, X, Clock, MessageCircle } from 'lucide-react';
 
 interface HelpRequest {
   id: string;
@@ -20,7 +20,7 @@ const helpRequests: HelpRequest[] = [
     id: '1',
     type: 'walk',
     title: '🐶 寻求帮忙遛狗',
-    description: '出差3天，需要有人帮忙遛狗。狗狗很乖，每天早晚各一次就好。',
+    description: '出差3天，需要有人帮忙遛狗。狗狗很乖，每天早晚各一次就好。狗狗叫大黄，是一只3岁的金毛犬，性格温顺，不会咬人。',
     location: '香洲区吉大',
     date: '2024-01-15',
     author: '金毛大黄',
@@ -33,7 +33,7 @@ const helpRequests: HelpRequest[] = [
     id: '2',
     type: 'feed',
     title: '🐱 上门喂养猫咪',
-    description: '周末外出，需要有人帮忙喂猫。猫粮在厨房，一天两次。',
+    description: '周末外出，需要有人帮忙喂猫。猫粮在厨房，一天两次。猫咪叫糖糖，是一只橘猫，很亲人。',
     location: '横琴新区',
     date: '2024-01-13',
     author: '橘猫糖糖',
@@ -46,11 +46,11 @@ const helpRequests: HelpRequest[] = [
     id: '3',
     type: 'care',
     title: '🐶 宠物寄养',
-    description: '回老家一周，需要寄养狗狗。狗狗疫苗齐全，性格温顺。',
+    description: '回老家一周，需要寄养狗狗。狗狗疫苗齐全，性格温顺。狗狗叫妮妮，是一只可爱的柯基犬。',
     location: '斗门区井岸',
     date: '2024-01-20',
     author: '柯基妮妮',
-    avatar: 'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=100&h=100&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1558656797-185e1e68f34e?w=100&h=100&fit=crop',
     status: 'pending',
     createdAt: new Date(Date.now() - 10800000),
     price: 50
@@ -59,7 +59,7 @@ const helpRequests: HelpRequest[] = [
     id: '4',
     type: 'walk',
     title: '🐶 每天帮忙遛狗',
-    description: '每天早上7-8点，帮忙遛30分钟。长期需求。',
+    description: '每天早上7-8点，帮忙遛30分钟。长期需求。狗狗叫球球，是一只泰迪犬。',
     location: '香洲区拱北',
     date: '长期',
     author: '泰迪球球',
@@ -72,7 +72,7 @@ const helpRequests: HelpRequest[] = [
     id: '5',
     type: 'feed',
     title: '🐱 喂食+换猫砂',
-    description: '出差5天，需要每天喂食并清理猫砂。',
+    description: '出差5天，需要每天喂食并清理猫砂。猫咪叫蓝蓝，是一只英短蓝猫。',
     location: '金湾区三灶',
     date: '2024-01-18',
     author: '英短蓝蓝',
@@ -83,22 +83,13 @@ const helpRequests: HelpRequest[] = [
   }
 ];
 
-const HelpRequestCard = ({ request }: { request: HelpRequest }) => {
+const HelpRequestCard = ({ request, onClick }: { request: HelpRequest; onClick: () => void }) => {
   const getTypeIcon = (type: string) => {
     switch(type) {
       case 'walk': return '🐕';
       case 'feed': return '🍖';
       case 'care': return '🏠';
       default: return '🐾';
-    }
-  };
-
-  const getTypeLabel = (type: string) => {
-    switch(type) {
-      case 'walk': return '帮忙遛狗';
-      case 'feed': return '上门喂养';
-      case 'care': return '宠物寄养';
-      default: return '其他帮助';
     }
   };
 
@@ -131,7 +122,10 @@ const HelpRequestCard = ({ request }: { request: HelpRequest }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+    <div 
+      onClick={onClick}
+      className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-all cursor-pointer"
+    >
       <div className="flex items-start gap-4">
         <div className="relative">
           <img 
@@ -194,6 +188,8 @@ const HelpRequestCard = ({ request }: { request: HelpRequest }) => {
 
 const HelpPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<HelpRequest | null>(null);
   const [selectedType, setSelectedType] = useState('walk');
   const [isFree, setIsFree] = useState(true);
   const [price, setPrice] = useState('');
@@ -223,6 +219,38 @@ const HelpPage = () => {
     setFormData({ title: '', description: '', location: '', date: '' });
     setIsFree(true);
     setPrice('');
+  };
+
+  const handleCardClick = (request: HelpRequest) => {
+    setSelectedRequest(request);
+    setShowDetailModal(true);
+  };
+
+  const getTypeIcon = (type: string) => {
+    switch(type) {
+      case 'walk': return '🐕';
+      case 'feed': return '🍖';
+      case 'care': return '🏠';
+      default: return '🐾';
+    }
+  };
+
+  const getStatusLabel = (status: string) => {
+    switch(status) {
+      case 'pending': return '待匹配';
+      case 'matched': return '已匹配';
+      case 'completed': return '已完成';
+      default: return '未知';
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch(status) {
+      case 'pending': return 'bg-yellow-100 text-yellow-600';
+      case 'matched': return 'bg-blue-100 text-blue-600';
+      case 'completed': return 'bg-green-100 text-green-600';
+      default: return 'bg-gray-100 text-gray-600';
+    }
   };
 
   return (
@@ -283,15 +311,93 @@ const HelpPage = () => {
 
         <div className="space-y-4">
           {filteredRequests.map((request) => (
-            <HelpRequestCard key={request.id} request={request} />
+            <HelpRequestCard 
+              key={request.id} 
+              request={request}
+              onClick={() => handleCardClick(request)}
+            />
           ))}
         </div>
       </main>
 
+      {showDetailModal && selectedRequest && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4" onClick={() => setShowDetailModal(false)}>
+          <div className="bg-white rounded-3xl w-full max-h-[85vh] overflow-auto shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl sticky top-0">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  {getTypeIcon(selectedRequest.type)}
+                  {selectedRequest.title}
+                </h2>
+                <button 
+                  onClick={() => setShowDetailModal(false)}
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-5">
+              <div className="flex items-center gap-4 mb-4">
+                <img 
+                  src={selectedRequest.avatar} 
+                  alt={selectedRequest.author}
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-bold text-gray-800 text-lg">{selectedRequest.author}</p>
+                  <p className="text-gray-500 text-sm">发布于 {selectedRequest.date}</p>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-4 mb-4">
+                <p className="text-gray-700 leading-relaxed">{selectedRequest.description}</p>
+              </div>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3 text-gray-600">
+                  <MapPin size={18} className="text-pink-400" />
+                  <span className="font-medium">{selectedRequest.location}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-600">
+                  <Calendar size={18} className="text-purple-400" />
+                  <span className="font-medium">需求日期：{selectedRequest.date}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-600">
+                  <Clock size={18} className="text-blue-400" />
+                  <span className="font-medium">发布时间：{new Date(selectedRequest.createdAt).toLocaleString('zh-CN')}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between mb-6 py-4 border-y border-gray-100">
+                <span className={`px-4 py-2 rounded-full text-sm font-bold ${getStatusColor(selectedRequest.status)}`}>
+                  {getStatusLabel(selectedRequest.status)}
+                </span>
+                {selectedRequest.price !== null ? (
+                  <span className="px-4 py-2 bg-gradient-to-r from-green-400 to-green-500 text-white rounded-full text-sm font-bold">
+                    💰 ¥{selectedRequest.price}
+                  </span>
+                ) : (
+                  <span className="px-4 py-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-full text-sm font-bold">
+                    🆓 免费
+                  </span>
+                )}
+              </div>
+
+              <button className="w-full py-3.5 bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                <MessageCircle size={20} />
+                联系求助者
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-4" onClick={() => setShowModal(false)}>
+          <div className="bg-white rounded-3xl w-full max-h-[90vh] overflow-auto shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white p-5 rounded-t-3xl sticky top-0">
               <h2 className="text-xl font-bold flex items-center gap-2">
                 <Plus size={24} />
                 发布互助需求

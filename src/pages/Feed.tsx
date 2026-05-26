@@ -185,10 +185,10 @@ const Feed = () => {
                   onClick={() => navigate('/exposure')}
                   className="px-5 py-2 text-sm font-bold whitespace-nowrap rounded-full transition-all shadow-sm"
                   style={{
-                    backgroundColor: 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)',
-                    background: 'linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)',
+                    backgroundColor: 'linear-gradient(135deg, #FF6B35 0%, #FF2D2D 100%)',
+                    background: 'linear-gradient(135deg, #FF6B35 0%, #FF2D2D 100%)',
                     color: 'white',
-                    boxShadow: '0 4px 15px rgba(255, 107, 157, 0.4)'
+                    boxShadow: '0 4px 15px rgba(255, 107, 53, 0.4)'
                   }}
                 >
                   ⚠️ {tag}
