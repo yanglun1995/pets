@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
 import { Plus, Heart, Search, Upload } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
 import HelpCard from '../components/HelpCard';
 
 const Help = () => {
+  const navigate = useNavigate();
   const { helpRequests, addHelpRequest } = useAppStore();
   const [showModal, setShowModal] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -120,9 +122,13 @@ const Help = () => {
 
         {/* Requests Grid */}
         {filteredRequests.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredRequests.map((request) => (
-              <HelpCard key={request.id} request={request} />
+              <HelpCard 
+                key={request.id} 
+                request={request}
+                onClick={() => navigate(`/post/help/${request.id}`)}
+              />
             ))}
           </div>
         ) : (
@@ -137,40 +143,40 @@ const Help = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
           <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="sticky top-0 bg-gradient-to-r from-red-500 to-pink-500 text-white p-6 rounded-t-2xl z-10">
+            <div className="sticky top-0 bg-gradient-to-r from-red-500 to-pink-500 text-white p-4 md:p-6 rounded-t-2xl z-10">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">发布求助</h2>
+                <h2 className="text-xl md:text-2xl font-bold">发布求助</h2>
                 <button
                   onClick={() => {
                     setShowModal(false);
                     setPreviewImage(null);
                   }}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors text-lg"
                 >
                   ✕
                 </button>
               </div>
             </div>
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">标题</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">标题</label>
                   <input
                     type="text"
                     required
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all text-base"
                     placeholder="简要描述你的求助..."
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">类型</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">类型</label>
                     <select
                       value={formData.type}
                       onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all text-base"
                     >
                       {types.filter(t => t !== '全部').map((type) => (
                         <option key={type} value={type}>{type}</option>
@@ -178,11 +184,11 @@ const Help = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">紧急度</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">紧急度</label>
                     <select
                       value={formData.urgency}
                       onChange={(e) => setFormData({ ...formData, urgency: Number(e.target.value) })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all text-base"
                     >
                       {[1, 2, 3, 4, 5].map((level) => (
                         <option key={level} value={level}>
@@ -193,35 +199,35 @@ const Help = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">位置</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">位置</label>
                   <input
                     type="text"
                     required
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all text-base"
                     placeholder="你的所在城市/区域"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">联系方式</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">联系方式</label>
                   <input
                     type="text"
                     required
                     value={formData.contact}
                     onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all text-base"
                     placeholder="手机号/微信/邮箱..."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">详细描述</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">详细描述</label>
                   <textarea
                     required
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all resize-none text-base"
                     placeholder="详细描述你的需求..."
                   />
                 </div>
@@ -230,7 +236,7 @@ const Help = () => {
                     上传图片（可选）
                   </label>
                   <div 
-                    className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-red-500 transition-colors cursor-pointer"
+                    className="border-2 border-dashed border-gray-300 rounded-xl p-4 md:p-6 text-center hover:border-red-500 transition-colors cursor-pointer"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     {previewImage ? (
@@ -243,16 +249,16 @@ const Help = () => {
                             setPreviewImage(null);
                             setFormData({...formData, image: ''});
                           }}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600 text-sm"
                         >
                           ✕
                         </button>
                       </div>
                     ) : (
                       <>
-                        <Upload className="mx-auto mb-2 text-gray-400" size={48} />
-                        <p className="text-gray-600">点击上传图片</p>
-                        <p className="text-gray-400 text-sm mt-1">支持 JPG、PNG 格式</p>
+                        <Upload className="mx-auto mb-2 text-gray-400" size={40} />
+                        <p className="text-gray-600 text-sm md:text-base">点击上传图片</p>
+                        <p className="text-gray-400 text-xs md:text-sm mt-1">支持 JPG、PNG 格式</p>
                       </>
                     )}
                   </div>
@@ -271,13 +277,13 @@ const Help = () => {
                       setShowModal(false);
                       setPreviewImage(null);
                     }}
-                    className="flex-1 px-6 py-3 border border-gray-200 text-gray-600 rounded-xl font-medium hover:bg-gray-50 transition-all"
+                    className="flex-1 px-6 py-3 border border-gray-200 text-gray-600 rounded-xl font-medium hover:bg-gray-50 transition-all text-base"
                   >
                     取消
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl font-medium hover:from-pink-500 hover:to-red-500 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
+                    className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl font-medium hover:from-pink-500 hover:to-red-500 transition-all shadow-md hover:shadow-lg transform hover:scale-105 text-base"
                   >
                     发布
                   </button>

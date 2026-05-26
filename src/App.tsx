@@ -7,6 +7,7 @@ import Help from "@/pages/Help";
 import Events from "@/pages/Events";
 import Exposure from "@/pages/Exposure";
 import About from "@/pages/About";
+import PostDetail from "@/pages/PostDetail";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/exposure" element={<Exposure />} />
             <Route path="/about" element={<About />} />
+            <Route path="/post/:type/:id" element={<PostDetail />} />
           </Routes>
         </main>
         <BottomNav />

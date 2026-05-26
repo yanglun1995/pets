@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
 import { Plus, MessageCircle, Search, Upload } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
 import ExchangeCard from '../components/ExchangeCard';
 
 const Exchange = () => {
+  const navigate = useNavigate();
   const { exchangePosts, addExchangePost, likeExchangePost } = useAppStore();
   const [showModal, setShowModal] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -116,12 +118,13 @@ const Exchange = () => {
 
         {/* Posts Grid */}
         {filteredPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredPosts.map((post) => (
               <ExchangeCard
                 key={post.id}
                 post={post}
                 onLike={likeExchangePost}
+                onClick={() => navigate(`/post/exchange/${post.id}`)}
               />
             ))}
           </div>
@@ -137,39 +140,39 @@ const Exchange = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
           <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="sticky top-0 bg-gradient-to-r from-primary to-purple-500 text-white p-6 rounded-t-2xl z-10">
+            <div className="sticky top-0 bg-gradient-to-r from-primary to-purple-500 text-white p-4 md:p-6 rounded-t-2xl z-10">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">发布交流</h2>
+                <h2 className="text-xl md:text-2xl font-bold">发布交流</h2>
                 <button
                   onClick={() => {
                     setShowModal(false);
                     setPreviewImage(null);
                   }}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors text-lg"
                 >
                   ✕
                 </button>
               </div>
             </div>
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">标题</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">标题</label>
                   <input
                     type="text"
                     required
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all text-base"
                     placeholder="给你的交流内容起个标题..."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">分类</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">分类</label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all text-base"
                   >
                     {categories.filter(c => c !== '全部').map((category) => (
                       <option key={category} value={category}>{category}</option>
@@ -177,13 +180,13 @@ const Exchange = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">内容</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">内容</label>
                   <textarea
                     required
                     value={formData.content}
                     onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                     rows={6}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all resize-none text-base"
                     placeholder="分享你的养宠心得..."
                   />
                 </div>
@@ -192,7 +195,7 @@ const Exchange = () => {
                     上传图片（可选）
                   </label>
                   <div 
-                    className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-primary transition-colors cursor-pointer"
+                    className="border-2 border-dashed border-gray-300 rounded-xl p-4 md:p-6 text-center hover:border-primary transition-colors cursor-pointer"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     {previewImage ? (
@@ -205,16 +208,16 @@ const Exchange = () => {
                             setPreviewImage(null);
                             setFormData({...formData, image: ''});
                           }}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600 text-sm"
                         >
                           ✕
                         </button>
                       </div>
                     ) : (
                       <>
-                        <Upload className="mx-auto mb-2 text-gray-400" size={48} />
-                        <p className="text-gray-600">点击上传图片</p>
-                        <p className="text-gray-400 text-sm mt-1">支持 JPG、PNG 格式</p>
+                        <Upload className="mx-auto mb-2 text-gray-400" size={40} />
+                        <p className="text-gray-600 text-sm md:text-base">点击上传图片</p>
+                        <p className="text-gray-400 text-xs md:text-sm mt-1">支持 JPG、PNG 格式</p>
                       </>
                     )}
                   </div>
@@ -233,13 +236,13 @@ const Exchange = () => {
                       setShowModal(false);
                       setPreviewImage(null);
                     }}
-                    className="flex-1 px-6 py-3 border border-gray-200 text-gray-600 rounded-xl font-medium hover:bg-gray-50 transition-all"
+                    className="flex-1 px-6 py-3 border border-gray-200 text-gray-600 rounded-xl font-medium hover:bg-gray-50 transition-all text-base"
                   >
                     取消
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-purple-500 text-white rounded-xl font-medium hover:from-purple-500 hover:to-primary transition-all shadow-md hover:shadow-lg transform hover:scale-105"
+                    className="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-purple-500 text-white rounded-xl font-medium hover:from-purple-500 hover:to-primary transition-all shadow-md hover:shadow-lg transform hover:scale-105 text-base"
                   >
                     发布
                   </button>

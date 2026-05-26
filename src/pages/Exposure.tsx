@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
 import { ShieldAlert, Plus, Search, Upload } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
 import ExposureCard from '../components/ExposureCard';
 
 const Exposure = () => {
+  const navigate = useNavigate();
   const { exposures, addExposure } = useAppStore();
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -158,9 +160,13 @@ const Exposure = () => {
 
         {/* Exposures Grid */}
         {filteredExposures.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredExposures.map((exposure) => (
-              <ExposureCard key={exposure.id} exposure={exposure} />
+              <ExposureCard 
+                key={exposure.id} 
+                exposure={exposure}
+                onClick={() => navigate(`/post/exposure/${exposure.id}`)}
+              />
             ))}
           </div>
         ) : (
@@ -175,22 +181,22 @@ const Exposure = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="sticky top-0 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-t-2xl z-10">
+            <div className="sticky top-0 bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 md:p-6 rounded-t-2xl z-10">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">曝光不文明养宠行为</h2>
+                <h2 className="text-xl md:text-2xl font-bold">曝光不文明养宠行为</h2>
                 <button
                   onClick={() => {
                     setShowModal(false);
                     setPreviewImage(null);
                   }}
-                  className="text-white hover:bg-white/20 rounded-full p-2 transition-colors"
+                  className="text-white hover:bg-white/20 rounded-full p-2 transition-colors text-lg"
                 >
                   ✕
                 </button>
               </div>
             </div>
             
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="p-4 md:p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   曝光标题 <span className="text-red-500">*</span>
@@ -200,7 +206,7 @@ const Exposure = () => {
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all text-base"
                   placeholder="例如：某小区大型犬未牵绳追逐行人"
                 />
               </div>
@@ -214,12 +220,12 @@ const Exposure = () => {
                   rows={4}
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all text-base"
                   placeholder="详细描述不文明行为的时间、地点、具体情况等"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     发生地点 <span className="text-red-500">*</span>
@@ -229,7 +235,7 @@ const Exposure = () => {
                     required
                     value={formData.location}
                     onChange={(e) => setFormData({...formData, location: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all text-base"
                     placeholder="例如：北京市朝阳区某小区"
                   />
                 </div>
@@ -242,7 +248,7 @@ const Exposure = () => {
                     required
                     value={formData.type}
                     onChange={(e) => setFormData({...formData, type: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all text-base"
                   >
                     <option value="不牵绳">不牵绳</option>
                     <option value="随地便溺">随地便溺</option>
@@ -262,7 +268,7 @@ const Exposure = () => {
                   required
                   value={formData.author}
                   onChange={(e) => setFormData({...formData, author: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all text-base"
                   placeholder="例如：热心市民"
                 />
               </div>
@@ -272,7 +278,7 @@ const Exposure = () => {
                   证据图片（可选）
                 </label>
                 <div 
-                  className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-red-500 transition-colors cursor-pointer"
+                  className="border-2 border-dashed border-gray-300 rounded-xl p-4 md:p-6 text-center hover:border-red-500 transition-colors cursor-pointer"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   {previewImage ? (
@@ -285,16 +291,16 @@ const Exposure = () => {
                           setPreviewImage(null);
                           setFormData({...formData, evidenceImages: ''});
                         }}
-                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600 text-sm"
                       >
                         ✕
                       </button>
                     </div>
                   ) : (
                     <>
-                      <Upload className="mx-auto mb-2 text-gray-400" size={48} />
-                      <p className="text-gray-600">点击或拖拽上传证据图片</p>
-                      <p className="text-gray-400 text-sm mt-1">支持 JPG、PNG 格式</p>
+                      <Upload className="mx-auto mb-2 text-gray-400" size={40} />
+                      <p className="text-gray-600 text-sm md:text-base">点击或拖拽上传证据图片</p>
+                      <p className="text-gray-400 text-xs md:text-sm mt-1">支持 JPG、PNG 格式</p>
                     </>
                   )}
                 </div>
@@ -314,13 +320,13 @@ const Exposure = () => {
                     setShowModal(false);
                     setPreviewImage(null);
                   }}
-                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors text-base"
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-orange-600 transition-all shadow-md hover:shadow-lg transform hover:scale-105 text-base"
                 >
                   提交曝光
                 </button>
