@@ -1,32 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import BottomNav from "@/components/BottomNav";
 import Feed from "@/pages/Feed";
-import Exchange from "@/pages/Exchange";
-import Help from "@/pages/Help";
-import Events from "@/pages/Events";
-import Exposure from "@/pages/Exposure";
-import About from "@/pages/About";
-import PostDetail from "@/pages/PostDetail";
-import VideoFeed from "@/pages/VideoFeed";
-import PetProfile from "@/pages/PetProfile";
 import NearbyDogs from "@/pages/NearbyDogs";
+import Exposure from "@/pages/Exposure";
+import MyProfile from "@/pages/MyProfile";
+import CreatePost from "@/pages/CreatePost";
 
 export default function App() {
   return (
     <Router basename="/pets">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
         <Routes>
           <Route path="/" element={<Feed />} />
-          <Route path="/exchange" element={<Exchange />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/exposure" element={<Exposure />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/video" element={<VideoFeed />} />
           <Route path="/nearby" element={<NearbyDogs />} />
-          <Route path="/profile/:id" element={<PetProfile />} />
-          <Route path="/post/:type/:id" element={<PostDetail />} />
+          <Route path="/create" element={<CreatePost />} />
+          <Route path="/exposure" element={<Exposure />} />
+          <Route path="/profile" element={<MyProfile />} />
         </Routes>
         <BottomNav />
       </div>
