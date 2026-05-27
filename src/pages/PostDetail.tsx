@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ThumbsUp, MessageCircle, Eye, Clock, User, Send, UserPlus, LogIn } from 'lucide-react';
+import { ArrowLeft, ThumbsUp, MessageCircle, Eye, Clock, User, Send, UserPlus, LogIn, UserCircle } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import { useUserStore } from '../store/useUserStore';
 import { useFeedStore } from '../store/useFeedStore';
@@ -10,7 +10,7 @@ const PostDetail = () => {
   const { type, id } = useParams();
   const { exchangePosts, helpRequests, events, exposures, likeExchangePost } = useAppStore();
   const { feedPosts } = useFeedStore();
-  const { currentUser, addComment, getComments, register, login } = useUserStore();
+  const { currentUser, addComment, getComments, register, login, demoLogin } = useUserStore();
   
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
@@ -414,8 +414,30 @@ const PostDetail = () => {
                   {authMode === 'login' ? '登录' : '注册'}
                 </button>
               </form>
+
+              <div className="flex items-center gap-3 my-4">
+                <div className="flex-1 h-px bg-gray-100" />
+                <span className="text-xs text-gray-400">或者</span>
+                <div className="flex-1 h-px bg-gray-100" />
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const result = demoLogin();
+                  if (result.success) {
+                    setShowAuthModal(false);
+                    setAuthMessage('');
+                    setFormData({ username: '', email: '', password: '' });
+                  }
+                }}
+                className="w-full py-3 border-2 border-pink-200 text-pink-500 rounded-xl font-bold hover:bg-pink-50 transition-all flex items-center justify-center gap-2 mb-3"
+              >
+                <UserPlus size={20} />
+                使用演示账号 (妮妮主人)
+              </button>
               
-              <div className="mt-4 text-center">
+              <div className="mt-2 text-center">
                 <button
                   type="button"
                   onClick={() => {

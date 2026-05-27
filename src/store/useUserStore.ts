@@ -24,6 +24,7 @@ interface UserStore {
   users: User[];
   currentUser: User | null;
   comments: Comment[];
+  demoLogin: () => { success: boolean; message: string };
   register: (username: string, email: string, password: string) => { success: boolean; message: string };
   login: (email: string, password: string) => { success: boolean; message: string };
   logout: () => void;
@@ -43,9 +44,28 @@ const defaultAvatars = [
 export const useUserStore = create<UserStore>()(
   persist(
     (set, get) => ({
-      users: [],
+      users: [{
+        id: 'demo-user',
+        username: '妮妮主人',
+        email: 'demo@example.com',
+        avatar: 'https://images.unsplash.com/photo-1558929996-da64ba858215?w=100&h=100&fit=crop',
+        registeredAt: new Date()
+      }],
       currentUser: null,
       comments: [],
+
+      demoLogin: () => {
+        const { users } = get();
+        const demoUser = users.find(u => u.id === 'demo-user') || {
+          id: 'demo-user',
+          username: '妮妮主人',
+          email: 'demo@example.com',
+          avatar: 'https://images.unsplash.com/photo-1558929996-da64ba858215?w=100&h=100&fit=crop',
+          registeredAt: new Date()
+        };
+        set({ currentUser: demoUser });
+        return { success: true, message: '欢迎回来！' };
+      },
       
       register: (username, email, password) => {
         const { users } = get();
@@ -70,8 +90,8 @@ export const useUserStore = create<UserStore>()(
           registeredAt: new Date()
         };
         
-        set({ users: [...users, newUser] });
-        return { success: true, message: '注册成功！' };
+        set({ users: [...users, newUser], currentUser: newUser });
+        return { success: true, message: '注册成功！已自动登录' };
       },
       
       login: (email, password) => {
@@ -79,7 +99,7 @@ export const useUserStore = create<UserStore>()(
         const user = users.find(u => u.email === email);
         
         if (!user) {
-          return { success: false, message: '用户不存在' };
+          return { success: false, message: '用户不存在，请先注册' };
         }
         
         set({ currentUser: user });
